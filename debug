@@ -1,0 +1,1 @@
+g++ -g -fsanitize=address,undefined -Wall -Wextra main.cpp -o a.out
