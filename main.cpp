@@ -30,6 +30,8 @@ int main(int argc, char **argv) {
 
 	if (S == "gcc") {
 		sorter = new GccSort();
+	} else if (S == "ssort") {
+		sorter = new SSort();
 	} else if (S == "insertion") {
 		sorter = new InsertionSort();
 	} else if (S == "quick") {

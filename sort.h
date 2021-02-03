@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "utils.h"
+#include "ssssort.h"
 
 using namespace std;
 
@@ -61,6 +62,14 @@ class GccSort: public Sort {
 public:
 	u64 sort(std::vector<u64> &v) {
 		std::sort(v.begin(), v.end());
+		return eval(v);
+	}
+};
+
+class SSort: public Sort {
+public:
+	u64 sort(std::vector<u64> &v) {
+		ssssort::ssssort(v.begin(), v.end());
 		return eval(v);
 	}
 };
