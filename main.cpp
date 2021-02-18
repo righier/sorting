@@ -3,6 +3,9 @@
 #include "sort.h"
 #include "timer.h"
 
+#include "samplesort.h"
+#include "mod.h"
+
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -44,12 +47,17 @@ int main(int argc, char **argv) {
 		sorter = new AdaptiveBucketSort(threshold);
 	} else if (S == "bucket2") {
 		sorter = new BucketSort2(buckets, threshold);
+	} else if (S == "bucket3") {
+		sorter = new BucketSort3(threshold);
+	} else if (S == "ssort2") {
+		sorter = new SampleSort2();
 	} else {
 		cerr << "UNKNOWN SORT ALGORITHM" << endl;
 		return 1;
 	}
 
-	double totalTime = 0;
+	Timer<> timer;
+
 	for (int i = 1; i <= nTests; i++) {
 
 		vector<u64> v = randomVector(rng, N);
@@ -62,12 +70,11 @@ int main(int argc, char **argv) {
 			cout << v << endl;
 		}
 
-		Timer<> timer;
 		timer.start();
 
 		u64 output = sorter->sort(v);
 
-		totalTime += timer.delta();
+		timer.delta();
 
 		cout << output << endl;
 
@@ -81,7 +88,7 @@ int main(int argc, char **argv) {
 
 	}
 
-	cout << "average time: " << (totalTime / nTests) * 1000 << endl;
+	cout << "average time: " << timer.avg() << endl;
 
 	delete sorter;
 

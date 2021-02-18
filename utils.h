@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cassert>
 
 #include "random.h"
 
@@ -37,4 +38,12 @@ bool isSorted(const std::vector<u64> &v) {
 		}
 	}
 	return true;
+}
+
+bool isPowerOfTwo(int x) {
+	return x && !(x&(x-1));
+}
+
+int ilog2(int x) {
+	return __builtin_ctz(x);
 }
